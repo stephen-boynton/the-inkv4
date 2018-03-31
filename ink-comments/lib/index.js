@@ -21,7 +21,6 @@ const startServer = async function() {
   try {
     const server = await Glue.compose(manifest, options);
     await server.start();
-    console.log(server);
     console.log("hapi days!");
   } catch (err) {
     console.error(err);
