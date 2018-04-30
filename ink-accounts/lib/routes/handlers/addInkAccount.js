@@ -6,7 +6,10 @@ module.exports = {
   config: {
     validate: {
       payload: {
-        first_name: Joi.string()
+        first_name: Joi.string(),
+        last_name: Joi.string(),
+        email: Joi.string(),
+        avatar: Joi.string()
       }
     }
   },

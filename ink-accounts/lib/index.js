@@ -1,4 +1,4 @@
-const Glue = require("glue");
+const Glue = require('glue');
 
 const manifest = {
   server: {
@@ -7,7 +7,7 @@ const manifest = {
   register: {
     plugins: [
       {
-        plugin: require("./routes")
+        plugin: require('./routes')
       }
     ]
   }
@@ -21,7 +21,7 @@ const startServer = async function() {
   try {
     const server = await Glue.compose(manifest, options);
     await server.start();
-    console.log("hapi days!");
+    console.log('hapi days!');
   } catch (err) {
     console.error(err);
     process.exit(1);

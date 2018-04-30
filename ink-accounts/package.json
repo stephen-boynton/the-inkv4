@@ -1,10 +1,15 @@
 {
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^5.0.1",
     "glue": "^5.0.0",
     "hapi": "^17.2.3",
     "joi": "^13.1.2",
+    "knex": "^0.14.4",
     "lodash": "^4.17.5",
-    "mongodb": "^3.0.5"
+    "mongodb": "^3.0.7",
+    "mongoose": "^5.0.16",
+    "s3": "^4.4.0"
   },
   "scripts": {
     "start": "node ."
