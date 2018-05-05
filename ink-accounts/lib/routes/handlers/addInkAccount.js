@@ -1,20 +1,30 @@
-const Joi = require("joi");
+const Joi = require('joi');
+const { createNewAccount } = require('../../dal');
 
 module.exports = {
-  method: "PUT",
-  path: "/users/",
+  method: 'PUT',
+  path: '/users/',
   config: {
     validate: {
       payload: {
-        first_name: Joi.string(),
-        last_name: Joi.string(),
+        firstName: Joi.string(),
+        lastName: Joi.string(),
+        profileName: Joi.string(),
+        profilePic: Joi.string().base64(),
         email: Joi.string(),
-        avatar: Joi.string()
+        socialLogin: Joi.string(),
+        password: Joi.string()
       }
     }
   },
 
-  handler: function handler(req, res) {
-    console.log("Hello!");
+  handler: async function handler(request, reply) {
+    console.log(request);
+    try {
+      await createNewAccount(request.payload);
+      reply().code(200);
+    } catch (e) {
+      reply(e);
+    }
   }
 };

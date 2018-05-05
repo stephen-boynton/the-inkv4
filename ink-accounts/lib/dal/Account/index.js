@@ -7,20 +7,24 @@ const AccountSchema = new mongoose.Schema({
   first_name: { type: String },
   last_name: { type: String },
   profile_name: { type: String, unique: true },
-  profile_pic: { type: String, default: 'https://image.freepik.com/free-icon/user-image-with-black-background_318-34564.jpg' },
+  profile_pic: {
+    type: String,
+    default:
+      'https://image.freepik.com/free-icon/user-image-with-black-background_318-34564.jpg'
+  },
   email: { type: String },
   social_login: { type: String },
   password: { type: String },
-  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "Account"}],
-  promoted_own: { type: mongoose.Schema.Types.ObjectId, ref: "Blog" },
-  promoted_other: { type: mongoose.Schema.Types.ObjectId, ref: "Blog"},
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Account' }],
+  promoted_own: { type: mongoose.Schema.Types.ObjectId, ref: 'Blog' },
+  promoted_other: { type: mongoose.Schema.Types.ObjectId, ref: 'Blog' },
   date_created: { type: Date, default: moment() },
   date_modified: { type: Date },
-  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Blog" }]
+  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Blog' }]
 });
 
-AccountSchema.statics.uploadPicToS3 = function(pic) {
-    return await upload(pic);
+AccountSchema.statics.uploadPicToS3 = async function(pic) {
+  return await upload(pic);
 };
 
 AccountSchema.statics.generateHash = function(password) {
