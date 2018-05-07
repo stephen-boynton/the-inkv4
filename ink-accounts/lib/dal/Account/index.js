@@ -23,8 +23,8 @@ const AccountSchema = new mongoose.Schema({
   favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Blog' }]
 });
 
-AccountSchema.statics.uploadPicToS3 = async function(pic) {
-  return await upload(pic);
+AccountSchema.statics.uploadPicToS3 = function(pic) {
+  return upload(pic);
 };
 
 AccountSchema.statics.generateHash = function(password) {

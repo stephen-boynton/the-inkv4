@@ -1,4 +1,5 @@
 const s3 = require('s3');
+const { cMaybe } = require('../../utility');
 
 const client = s3.createClient({
   s3Options: {
@@ -7,7 +8,8 @@ const client = s3.createClient({
   }
 });
 
-module.exports = function uploadToS3(file) {
+function uploadToS3(file) {
+  console.log('In here');
   const params = {
     localFile: file,
 
@@ -32,4 +34,6 @@ module.exports = function uploadToS3(file) {
   uploader.on('end', function() {
     console.log('done uploading');
   });
-};
+}
+
+module.exports = cMaybe(x => x, undefined, uploadToS3);

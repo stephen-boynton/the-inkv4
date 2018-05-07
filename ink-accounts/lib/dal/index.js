@@ -1,4 +1,5 @@
 const Account = require('./Account');
+const mongoose = require('./database');
 
 async function createNewAccount({
   firstName,
@@ -9,15 +10,25 @@ async function createNewAccount({
   socialLogin,
   password
 }) {
-  const account = new Account({
-    first_name: firstName,
-    last_name: lastName,
-    profile_name: profileName,
-    profile_pic: profilePic,
-    email,
-    social_login: socialLogin,
-    password: password
-  });
+  try {
+    const hashPass = Account.generateHash(password);
+    const uploadImage = Account.uploadPicToS3(profilePic);
+    console.log(uploadImage);
+    const account = new Account({
+      first_name: firstName,
+      last_name: lastName,
+      profile_name: profileName,
+      profile_pic: profilePic,
+      email,
+      social_login: socialLogin,
+      password: hashPass
+    });
+
+    // const result = await account.save();
+    return true;
+  } catch (err) {
+    throw err;
+  }
 }
 
 async function getAccountById(id) {

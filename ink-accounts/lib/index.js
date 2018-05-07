@@ -1,31 +1,9 @@
-const Glue = require('glue');
+const express = require('express');
+const app = express();
+const routes = require('./routes');
 
-const manifest = {
-  server: {
-    port: 3001
-  },
-  register: {
-    plugins: [
-      {
-        plugin: require('./routes')
-      }
-    ]
-  }
-};
+app.use(express.json());
 
-const options = {
-  relativeTo: __dirname
-};
+app.use('/', routes);
 
-const startServer = async function() {
-  try {
-    const server = await Glue.compose(manifest, options);
-    await server.start();
-    console.log('hapi days!');
-  } catch (err) {
-    console.error(err);
-    process.exit(1);
-  }
-};
-
-startServer();
+app.listen(3000, () => console.log('Example app listening on port 3000!'));
