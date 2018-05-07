@@ -1,14 +1,14 @@
-const fs = require("fs");
-const routePath = `${__dirname}/handlers/`;
+const router = require('express').Router();
+const { addAccountHandler } = require('./handlers');
+const { body } = require('express-validator/check');
+const {
+  validateAddAccount,
+  addAccountChecks
+} = require('./handlers/validations');
 
-exports.register = (server, options) => {
-  let routes = [];
+router
+  .use([addAccountChecks, validateAddAccount])
+  .route('/users/')
+  .post(addAccountHandler);
 
-  fs.readdirSync(routePath).forEach(file => {
-    routes = routes.concat(require(`${routePath}/${file}`));
-  });
-
-  server.route(routes);
-};
-
-exports.name = "paths";
+module.exports = router;

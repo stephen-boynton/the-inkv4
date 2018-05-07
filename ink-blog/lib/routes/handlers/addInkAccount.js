@@ -1,17 +1,12 @@
-const Joi = require("joi");
+const Joi = require('joi');
+const { createNewAccount } = require('../../dal');
+const { addInkAccountSchema } = require('./validations');
 
-module.exports = {
-  method: "PUT",
-  path: "/users/",
-  config: {
-    validate: {
-      payload: {
-        first_name: Joi.string()
-      }
-    }
-  },
-
-  handler: function handler(req, res) {
-    console.log("Hello!");
+module.exports = async function addAccountHandler(req, res) {
+  try {
+    await createNewAccount(req.body);
+    res.sendStatus(200);
+  } catch (err) {
+    res.send(err);
   }
 };
