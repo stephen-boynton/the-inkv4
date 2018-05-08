@@ -1,48 +1,36 @@
 const Account = require('./Account');
 const mongoose = require('./database');
 
-async function createNewAccount({
-  firstName,
-  lastName,
-  profileName,
-  profilePic,
-  email,
-  socialLogin,
-  password
-}) {
+async function createNewBlog({ title, tag, author, images, body, tags }) {
   try {
-    const hashPass = Account.generateHash(password);
-    const uploadImage = Account.uploadPicToS3(profilePic);
-    console.log(uploadImage);
-    const account = new Account({
-      first_name: firstName,
-      last_name: lastName,
-      profile_name: profileName,
-      profile_pic: profilePic,
-      email,
-      social_login: socialLogin,
-      password: hashPass
+    const blog = new Blog({
+      title,
+      tag,
+      author,
+      images,
+      body,
+      tags
     });
 
-    // const result = await account.save();
+    // const result = await blot.save();
     return true;
   } catch (err) {
     throw err;
   }
 }
 
-async function getAccountById(id) {
-  return await Account.find({ _id: id });
+async function getBlogById(id) {
+  return await Blog.find({ _id: id });
 }
 
-async function getAccountByProfileName(profileName) {
-  return await Account.find({ profile_name: profileName });
+async function getBlogsByProfileName(profileName) {
+  return await Blog.find({ profile_name: profileName });
 }
 
-async function deleteAccount(accountId) {}
+async function deleteBlog(id) {}
 
-async function updateAccount(accountId) {}
+async function updateBlog(id) {}
 
-async function getMultipleAccounts(accountId) {}
+async function getLatestBlogs(accountId) {}
 
-module.exports = { createNewAccount, getAccountById, getAccountByProfileName };
+module.exports = { createNewBlog };

@@ -1,1 +1,1 @@
-module.exports.addAccountHandler = require('./addInkAccount');
+module.exports.addBlogHandler = require('./addBlog');

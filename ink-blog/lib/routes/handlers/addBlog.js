@@ -1,10 +1,9 @@
 const Joi = require('joi');
-const { createNewAccount } = require('../../dal');
-const { addInkAccountSchema } = require('./validations');
+const { createNewBlog } = require('../../dal');
 
 module.exports = async function addAccountHandler(req, res) {
   try {
-    await createNewAccount(req.body);
+    await createNewBlog(req.body);
     res.sendStatus(200);
   } catch (err) {
     res.send(err);

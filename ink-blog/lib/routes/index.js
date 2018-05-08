@@ -1,14 +1,10 @@
 const router = require('express').Router();
-const { addAccountHandler } = require('./handlers');
-const { body } = require('express-validator/check');
-const {
-  validateAddAccount,
-  addAccountChecks
-} = require('./handlers/validations');
+const { addBlogHandler } = require('./handlers');
+const { validateAddBlog, addBlogChecks } = require('./handlers/validations');
 
 router
-  .use([addAccountChecks, validateAddAccount])
+  .use([addBlogChecks, validateAddBlog])
   .route('/users/')
-  .post(addAccountHandler);
+  .post(addBlogHandler);
 
 module.exports = router;
